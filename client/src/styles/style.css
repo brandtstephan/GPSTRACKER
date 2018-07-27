@@ -1,0 +1,15 @@
+.height {
+  height: 600px;
+}
+#map {
+  height: 600px;
+  width: 70%;
+}
+#flexbox {
+  display: flex;
+}
+#tracks {
+  height: 600px;
+  background-color: #00DFDF;
+  width: 30%;
+}

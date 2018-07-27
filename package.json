@@ -1,0 +1,40 @@
+{
+  "name": "pv-package",
+  "dependencies": {
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+    "babili": "^0.1.2",
+    "browserify": "^14.4.0",
+    "eslint": "^3.19.0",
+    "express": "^4.15.3",
+    "leaflet": "^1.1.0",
+    "less": "^2.7.2",
+    "less-plugin-clean-css": "^1.5.1",
+    "lodash": "^4.17.4",
+    "mocha": "^3.4.2",
+    "place": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "scripts": {
+    "start": "node index.js 8080",
+    "lint": "eslint -c .eslintrc.json scripts/**",
+    "build": "npm run clean && npm install && npm run lint && mkdir dist && npm run static:min && npm run css:min && npm run js:min",
+    "debug": "npm run clean:dist && npm install && npm run lint && mkdir dist && npm run static && npm run css && npm run js",
+    "static": "cp -r server/src/assets/. dist && cp client/src/index.html dist",
+    "static:min": "npm run static && place dist/index.html style.css style.min.css && place dist/index.html main.js main.min.js",
+    "css": "lessc client/src/styles/style.less dist/style.css",
+    "css:min": "lessc --clean-css client/src/styles/style.less dist/style.min.css",
+    "prejs": "npm test",
+    "js": "browserify client/src/scripts/main.js > dist/main.js",
+    "js:min": "npm run js && babili dist/main.js > dist/main.min.js",
+    "postjs:min": "rimraf dist/main.js",
+    "clean": "npm run clean:dist && rm -rf node_modules",
+    "clean:dist": "rm -rf dist",
+    "test": "mocha server/test/test.js"
+  },
+  "author": "stephan brandt",
+  "license": "UNLICENSED"
+}
